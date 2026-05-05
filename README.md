@@ -61,3 +61,4 @@ A chave da API e os dados nunca passam por nenhum servidor terceiro. A comunica�
 ## Licença
 
 Use à vontade.
+
