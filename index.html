@@ -1,0 +1,1118 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="description" content="Transforme qualquer livro em um relatório estratégico e aplicável. Receba uma análise completa em PDF, gerada por IA." />
+<title>Analista de Livros — Relatórios estratégicos em PDF</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+  /* ---------- Tokens ---------- */
+  :root {
+    --bg: #F7F4EE;
+    --bg-alt: #FFFFFF;
+    --bg-deep: #1A1A1A;
+    --fg: #1A1A1A;
+    --fg-muted: #555550;
+    --fg-subtle: #8A8580;
+    --accent: #8B5E3C;
+    --accent-hover: #6F4A2E;
+    --accent-soft: rgba(139, 94, 60, 0.08);
+    --border: rgba(26, 26, 26, 0.10);
+    --border-strong: rgba(26, 26, 26, 0.18);
+    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.04);
+    --shadow-md: 0 4px 14px rgba(0, 0, 0, 0.06), 0 1px 3px rgba(0, 0, 0, 0.04);
+    --shadow-lg: 0 24px 60px -12px rgba(0, 0, 0, 0.12), 0 8px 24px -8px rgba(0, 0, 0, 0.06);
+    --radius-sm: 8px;
+    --radius-md: 12px;
+    --radius-lg: 18px;
+    --font-serif: 'Fraunces', 'Times New Roman', Georgia, serif;
+    --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    --max-w: 1100px;
+    --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  /* ---------- Reset ---------- */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg);
+    color: var(--fg);
+    font-family: var(--font-sans);
+    font-size: 16px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    overflow-x: hidden;
+  }
+  img { max-width: 100%; display: block; }
+  button { font: inherit; cursor: pointer; border: none; background: none; color: inherit; }
+  input, textarea { font: inherit; color: inherit; }
+  a { color: inherit; text-decoration: none; }
+
+  /* Subtle paper texture */
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    background-image: radial-gradient(circle at 1px 1px, rgba(26,26,26,0.025) 1px, transparent 0);
+    background-size: 24px 24px;
+  }
+
+  .container {
+    max-width: var(--max-w);
+    margin: 0 auto;
+    padding: 0 28px;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* ---------- Header ---------- */
+  .site-header {
+    padding: 28px 0;
+    border-bottom: 1px solid var(--border);
+    position: relative;
+    z-index: 10;
+  }
+  .nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family: var(--font-serif);
+    font-weight: 600;
+    font-size: 18px;
+    letter-spacing: -0.01em;
+  }
+  .brand-mark {
+    width: 28px;
+    height: 28px;
+    background: var(--bg-deep);
+    color: var(--bg);
+    border-radius: 6px;
+    display: grid;
+    place-items: center;
+    font-family: var(--font-serif);
+    font-weight: 700;
+    font-size: 15px;
+    font-style: italic;
+  }
+  .nav-link {
+    font-size: 14px;
+    color: var(--fg-muted);
+    transition: color 0.2s var(--ease);
+  }
+  .nav-link:hover { color: var(--fg); }
+
+  /* ---------- Hero ---------- */
+  .hero {
+    padding: 80px 0 60px;
+    text-align: center;
+  }
+  .eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    color: var(--accent);
+    font-weight: 500;
+    margin-bottom: 24px;
+  }
+  .eyebrow::before {
+    content: "";
+    width: 24px;
+    height: 1px;
+    background: currentColor;
+  }
+  .hero h1 {
+    font-family: var(--font-serif);
+    font-weight: 500;
+    font-size: clamp(40px, 6vw, 72px);
+    line-height: 1.04;
+    letter-spacing: -0.025em;
+    margin-bottom: 24px;
+    max-width: 16ch;
+    margin-inline: auto;
+  }
+  .hero h1 em {
+    font-style: italic;
+    color: var(--accent);
+    font-weight: 400;
+  }
+  .hero-sub {
+    font-size: clamp(16px, 1.6vw, 19px);
+    color: var(--fg-muted);
+    max-width: 56ch;
+    margin: 0 auto 56px;
+    line-height: 1.55;
+  }
+
+  /* ---------- Form Card ---------- */
+  .form-card {
+    background: var(--bg-alt);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 40px;
+    max-width: 580px;
+    margin: 0 auto;
+    box-shadow: var(--shadow-lg);
+    text-align: left;
+  }
+  .form-card-title {
+    font-family: var(--font-serif);
+    font-weight: 500;
+    font-size: 22px;
+    letter-spacing: -0.01em;
+    margin-bottom: 8px;
+  }
+  .form-card-desc {
+    font-size: 14px;
+    color: var(--fg-muted);
+    margin-bottom: 28px;
+  }
+  .field {
+    margin-bottom: 20px;
+  }
+  .field-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+  .label {
+    display: block;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--fg);
+    margin-bottom: 8px;
+    letter-spacing: -0.005em;
+  }
+  .label-optional {
+    color: var(--fg-subtle);
+    font-weight: 400;
+    margin-left: 6px;
+  }
+  .input {
+    width: 100%;
+    padding: 13px 16px;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    font-size: 15px;
+    color: var(--fg);
+    transition: border-color 0.2s var(--ease), box-shadow 0.2s var(--ease), background 0.2s var(--ease);
+    font-family: var(--font-sans);
+  }
+  .input::placeholder { color: var(--fg-subtle); }
+  .input:hover { border-color: var(--border-strong); }
+  .input:focus {
+    outline: none;
+    background: var(--bg-alt);
+    border-color: var(--accent);
+    box-shadow: 0 0 0 4px var(--accent-soft);
+  }
+  .field-help {
+    margin-top: 8px;
+    font-size: 12px;
+    color: var(--fg-subtle);
+    line-height: 1.5;
+  }
+  .field-help a {
+    color: var(--accent);
+    border-bottom: 1px solid var(--accent-soft);
+    transition: border-color 0.2s var(--ease);
+  }
+  .field-help a:hover { border-bottom-color: var(--accent); }
+
+  .api-row {
+    display: flex;
+    gap: 8px;
+    align-items: stretch;
+  }
+  .api-row .input { flex: 1; padding-right: 44px; }
+  .api-toggle {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 28px;
+    height: 28px;
+    display: grid;
+    place-items: center;
+    color: var(--fg-subtle);
+    border-radius: 6px;
+    transition: color 0.2s var(--ease), background 0.2s var(--ease);
+  }
+  .api-toggle:hover { color: var(--fg); background: var(--bg); }
+  .api-input-wrap { position: relative; }
+
+  .checkbox-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 14px;
+    font-size: 13px;
+    color: var(--fg-muted);
+  }
+  .checkbox-row input { accent-color: var(--accent); }
+
+  /* Submit button */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 15px 28px;
+    background: var(--bg-deep);
+    color: var(--bg);
+    border-radius: var(--radius-md);
+    font-size: 15px;
+    font-weight: 500;
+    letter-spacing: -0.005em;
+    transition: transform 0.15s var(--ease), background 0.2s var(--ease), box-shadow 0.2s var(--ease);
+    width: 100%;
+    margin-top: 8px;
+    position: relative;
+    overflow: hidden;
+  }
+  .btn:hover { background: #000; box-shadow: var(--shadow-md); }
+  .btn:active { transform: translateY(1px); }
+  .btn:disabled { opacity: 0.65; cursor: not-allowed; transform: none; }
+  .btn .arrow { transition: transform 0.25s var(--ease); }
+  .btn:hover .arrow { transform: translateX(3px); }
+
+  .btn-secondary {
+    background: var(--bg-alt);
+    color: var(--fg);
+    border: 1px solid var(--border-strong);
+  }
+  .btn-secondary:hover { background: var(--bg); }
+
+  .btn-accent {
+    background: var(--accent);
+  }
+  .btn-accent:hover { background: var(--accent-hover); }
+
+  /* Loading spinner */
+  .spinner {
+    width: 16px;
+    height: 16px;
+    border: 2px solid currentColor;
+    border-right-color: transparent;
+    border-radius: 50%;
+    animation: spin 0.7s linear infinite;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  /* ---------- Steps ---------- */
+  .steps {
+    padding: 80px 0 40px;
+    border-top: 1px solid var(--border);
+    margin-top: 80px;
+  }
+  .section-label {
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    color: var(--fg-subtle);
+    text-align: center;
+    margin-bottom: 12px;
+  }
+  .section-title {
+    font-family: var(--font-serif);
+    font-weight: 500;
+    font-size: clamp(28px, 3.6vw, 42px);
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    text-align: center;
+    margin-bottom: 56px;
+    max-width: 22ch;
+    margin-inline: auto;
+  }
+  .steps-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+  }
+  .step {
+    background: var(--bg-alt);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 32px;
+    transition: transform 0.3s var(--ease), box-shadow 0.3s var(--ease);
+  }
+  .step:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+  }
+  .step-num {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-weight: 500;
+    font-size: 32px;
+    color: var(--accent);
+    line-height: 1;
+    margin-bottom: 18px;
+  }
+  .step-title {
+    font-family: var(--font-serif);
+    font-weight: 500;
+    font-size: 19px;
+    margin-bottom: 8px;
+    letter-spacing: -0.01em;
+  }
+  .step-desc {
+    font-size: 14px;
+    color: var(--fg-muted);
+    line-height: 1.6;
+  }
+
+  /* ---------- Result ---------- */
+  .result {
+    padding: 60px 0 40px;
+    display: none;
+    animation: fadeUp 0.6s var(--ease);
+  }
+  .result.is-visible { display: block; }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .result-card {
+    background: var(--bg-alt);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    box-shadow: var(--shadow-lg);
+  }
+  .result-header {
+    padding: 32px 40px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+  .result-meta-eyebrow {
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    color: var(--accent);
+    margin-bottom: 6px;
+  }
+  .result-meta-title {
+    font-family: var(--font-serif);
+    font-weight: 500;
+    font-size: 26px;
+    letter-spacing: -0.015em;
+    line-height: 1.15;
+  }
+  .result-meta-author {
+    color: var(--fg-muted);
+    font-size: 14px;
+    margin-top: 6px;
+  }
+  .result-actions {
+    display: flex;
+    gap: 10px;
+    flex-shrink: 0;
+  }
+  .result-actions .btn { width: auto; margin: 0; padding: 12px 20px; font-size: 14px; }
+  .result-body {
+    padding: 32px 40px 40px;
+    max-height: 600px;
+    overflow-y: auto;
+    font-family: var(--font-serif);
+    font-size: 16px;
+    line-height: 1.7;
+    color: var(--fg);
+  }
+  .result-body::-webkit-scrollbar { width: 8px; }
+  .result-body::-webkit-scrollbar-track { background: transparent; }
+  .result-body::-webkit-scrollbar-thumb { background: var(--border-strong); border-radius: 4px; }
+
+  .result-body h2 {
+    font-family: var(--font-serif);
+    font-weight: 600;
+    font-size: 22px;
+    letter-spacing: -0.015em;
+    margin: 36px 0 14px;
+    color: var(--fg);
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--border);
+  }
+  .result-body h2:first-child { margin-top: 0; }
+  .result-body h3 {
+    font-family: var(--font-serif);
+    font-weight: 600;
+    font-size: 17px;
+    margin: 24px 0 10px;
+  }
+  .result-body p { margin-bottom: 14px; }
+  .result-body ul, .result-body ol { margin: 12px 0 14px 24px; }
+  .result-body li { margin-bottom: 8px; }
+  .result-body strong { color: var(--accent); font-weight: 600; }
+  .result-body em { font-style: italic; }
+
+  /* Status / errors */
+  .status {
+    margin-top: 18px;
+    padding: 14px 18px;
+    border-radius: var(--radius-md);
+    font-size: 14px;
+    display: none;
+  }
+  .status.is-visible { display: block; }
+  .status-error {
+    background: #FDF1ED;
+    color: #8B2F1A;
+    border: 1px solid #F5C9BC;
+  }
+  .status-info {
+    background: var(--accent-soft);
+    color: var(--accent-hover);
+    border: 1px solid rgba(139, 94, 60, 0.18);
+  }
+
+  /* ---------- Footer ---------- */
+  .site-footer {
+    margin-top: 100px;
+    padding: 40px 0;
+    border-top: 1px solid var(--border);
+    color: var(--fg-subtle);
+    font-size: 13px;
+  }
+  .footer-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+  .footer-row a { transition: color 0.2s var(--ease); }
+  .footer-row a:hover { color: var(--fg); }
+
+  /* ---------- PDF Template (offscreen) ---------- */
+  .pdf-doc {
+    position: absolute;
+    left: -10000px;
+    top: 0;
+    width: 794px; /* A4 at 96dpi */
+    background: #FFFFFF;
+    color: #1A1A1A;
+    font-family: 'Fraunces', Georgia, serif;
+    line-height: 1.65;
+    font-size: 13px;
+  }
+  .pdf-page {
+    width: 794px;
+    min-height: 1123px; /* A4 height */
+    padding: 70px 70px 90px;
+    position: relative;
+    background: #FFFFFF;
+    page-break-after: always;
+    box-sizing: border-box;
+  }
+  .pdf-page:last-child { page-break-after: auto; }
+  .pdf-cover {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    text-align: left;
+  }
+  .pdf-cover-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #1A1A1A;
+    padding-bottom: 18px;
+  }
+  .pdf-cover-brand {
+    font-family: 'Fraunces', serif;
+    font-weight: 600;
+    font-size: 14px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+  .pdf-cover-date {
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    color: #555;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+  .pdf-cover-middle { padding: 100px 0 40px; }
+  .pdf-cover-eyebrow {
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.22em;
+    color: #8B5E3C;
+    margin-bottom: 24px;
+  }
+  .pdf-cover-title {
+    font-family: 'Fraunces', serif;
+    font-weight: 500;
+    font-size: 56px;
+    line-height: 1.02;
+    letter-spacing: -0.025em;
+    margin-bottom: 18px;
+    max-width: 16ch;
+  }
+  .pdf-cover-title em { font-style: italic; color: #8B5E3C; font-weight: 400; }
+  .pdf-cover-author {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 19px;
+    color: #555;
+    margin-bottom: 60px;
+  }
+  .pdf-cover-rule {
+    width: 70px;
+    height: 2px;
+    background: #8B5E3C;
+    margin-bottom: 24px;
+  }
+  .pdf-cover-tagline {
+    font-family: 'Fraunces', serif;
+    font-size: 18px;
+    line-height: 1.45;
+    color: #1A1A1A;
+    max-width: 38ch;
+    font-weight: 400;
+  }
+  .pdf-cover-bottom {
+    margin-top: auto;
+    padding-top: 60px;
+    border-top: 1px solid #ddd;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+  }
+  .pdf-cover-bottom-label {
+    font-family: 'Inter', sans-serif;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: #8A8580;
+  }
+  .pdf-cover-signature {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 14px;
+    color: #1A1A1A;
+  }
+
+  .pdf-content { padding-top: 20px; }
+  .pdf-content h2 {
+    font-family: 'Fraunces', serif;
+    font-weight: 500;
+    font-size: 26px;
+    line-height: 1.15;
+    letter-spacing: -0.015em;
+    margin: 30px 0 14px;
+    color: #1A1A1A;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #1A1A1A;
+    page-break-after: avoid;
+  }
+  .pdf-content h2:first-child { margin-top: 0; }
+  .pdf-content h3 {
+    font-family: 'Fraunces', serif;
+    font-weight: 600;
+    font-size: 16px;
+    margin: 18px 0 8px;
+    page-break-after: avoid;
+  }
+  .pdf-content p {
+    margin-bottom: 12px;
+    font-size: 13px;
+    line-height: 1.7;
+    color: #2a2a2a;
+    text-align: justify;
+    hyphens: auto;
+  }
+  .pdf-content ul, .pdf-content ol { margin: 10px 0 14px 22px; }
+  .pdf-content li {
+    margin-bottom: 7px;
+    font-size: 13px;
+    line-height: 1.65;
+    color: #2a2a2a;
+  }
+  .pdf-content strong { color: #8B5E3C; font-weight: 600; }
+  .pdf-content em { font-style: italic; }
+
+  .pdf-footer {
+    position: absolute;
+    bottom: 30px;
+    left: 70px;
+    right: 70px;
+    display: flex;
+    justify-content: space-between;
+    font-family: 'Inter', sans-serif;
+    font-size: 10px;
+    color: #8A8580;
+    letter-spacing: 0.05em;
+    border-top: 1px solid #eee;
+    padding-top: 12px;
+  }
+
+  /* ---------- Responsive ---------- */
+  @media (max-width: 720px) {
+    .container { padding: 0 20px; }
+    .hero { padding: 56px 0 40px; }
+    .form-card { padding: 28px 24px; }
+    .field-row { grid-template-columns: 1fr; gap: 0; }
+    .field-row .field { margin-bottom: 20px; }
+    .steps { padding: 60px 0 20px; margin-top: 60px; }
+    .steps-grid { grid-template-columns: 1fr; gap: 16px; }
+    .step { padding: 24px; }
+    .result-header { padding: 24px; flex-direction: column; align-items: stretch; }
+    .result-actions { width: 100%; }
+    .result-actions .btn { flex: 1; }
+    .result-body { padding: 24px; }
+    .footer-row { flex-direction: column; text-align: center; }
+  }
+
+  /* Print fallback */
+  @media print {
+    body::before { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container">
+    <nav class="nav">
+      <div class="brand">
+        <span class="brand-mark">A</span>
+        <span>Analista de Livros</span>
+      </div>
+      <a class="nav-link" href="#como-funciona">Como funciona</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <!-- HERO -->
+  <section class="hero">
+    <div class="container">
+      <span class="eyebrow">Resumos estratégicos · Aplicação prática</span>
+      <h1>Transforme qualquer livro em <em>conhecimento aplicável</em>.</h1>
+      <p class="hero-sub">
+        Diga o nome do livro. Nossa IA entrega um relatório editorial em PDF com a essência, os insights e um plano de ação direto ao ponto — sem enrolação acadêmica.
+      </p>
+
+      <form class="form-card" id="form">
+        <h2 class="form-card-title">Gere seu relatório</h2>
+        <p class="form-card-desc">Preencha os campos abaixo. O PDF é gerado em segundos.</p>
+
+        <div class="field-row">
+          <div class="field">
+            <label class="label" for="book">Nome do livro</label>
+            <input class="input" type="text" id="book" name="book" placeholder="Ex.: Pai Rico, Pai Pobre" required autocomplete="off" />
+          </div>
+          <div class="field">
+            <label class="label" for="author">Autor <span class="label-optional">(opcional)</span></label>
+            <input class="input" type="text" id="author" name="author" placeholder="Ex.: Robert Kiyosaki" autocomplete="off" />
+          </div>
+        </div>
+
+        <div class="field">
+          <label class="label" for="apikey">Chave da API Anthropic</label>
+          <div class="api-input-wrap">
+            <input class="input" type="password" id="apikey" name="apikey" placeholder="sk-ant-..." required autocomplete="off" />
+            <button type="button" class="api-toggle" id="apiToggle" aria-label="Mostrar/ocultar chave">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+            </button>
+          </div>
+          <p class="field-help">
+            Sua chave fica apenas neste navegador, nunca é enviada para nossos servidores.
+            <a href="https://console.anthropic.com/settings/keys" target="_blank" rel="noopener">Obter uma chave →</a>
+          </p>
+          <label class="checkbox-row">
+            <input type="checkbox" id="remember" />
+            Lembrar minha chave neste navegador
+          </label>
+        </div>
+
+        <button type="submit" class="btn" id="submitBtn">
+          <span id="btnText">Gerar relatório</span>
+          <span class="arrow">→</span>
+        </button>
+
+        <div class="status status-info" id="status"></div>
+      </form>
+    </div>
+  </section>
+
+  <!-- RESULT -->
+  <section class="result" id="result">
+    <div class="container">
+      <div class="result-card">
+        <div class="result-header">
+          <div>
+            <div class="result-meta-eyebrow">Relatório pronto</div>
+            <div class="result-meta-title" id="resultTitle"></div>
+            <div class="result-meta-author" id="resultAuthor"></div>
+          </div>
+          <div class="result-actions">
+            <button class="btn btn-secondary" id="newBtn">
+              <span>Novo livro</span>
+            </button>
+            <button class="btn btn-accent" id="downloadBtn">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+              <span>Baixar PDF</span>
+            </button>
+          </div>
+        </div>
+        <div class="result-body" id="resultBody"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section class="steps" id="como-funciona">
+    <div class="container">
+      <div class="section-label">Processo</div>
+      <h2 class="section-title">Da capa à ação em três passos</h2>
+      <div class="steps-grid">
+        <div class="step">
+          <div class="step-num">01</div>
+          <h3 class="step-title">Diga o livro</h3>
+          <p class="step-desc">Nome e (opcionalmente) autor. Quanto mais específico, mais precisa a análise.</p>
+        </div>
+        <div class="step">
+          <div class="step-num">02</div>
+          <h3 class="step-title">A IA destila</h3>
+          <p class="step-desc">Visão geral, ideias-chave, melhores partes, aplicação prática, erros comuns e plano de ação.</p>
+        </div>
+        <div class="step">
+          <div class="step-num">03</div>
+          <h3 class="step-title">Baixe seu PDF</h3>
+          <p class="step-desc">Um relatório editorial pronto para ler, imprimir ou compartilhar.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-row">
+      <span>© <span id="year"></span> Analista de Livros · Construído com IA</span>
+      <a href="https://github.com" target="_blank" rel="noopener">Ver no GitHub</a>
+    </div>
+  </div>
+</footer>
+
+<!-- PDF TEMPLATE (offscreen) -->
+<div class="pdf-doc" id="pdfTemplate" aria-hidden="true">
+  <!-- Cover page -->
+  <div class="pdf-page pdf-cover">
+    <div class="pdf-cover-top">
+      <div class="pdf-cover-brand">Analista de Livros</div>
+      <div class="pdf-cover-date" id="pdfDate"></div>
+    </div>
+    <div class="pdf-cover-middle">
+      <div class="pdf-cover-eyebrow">Relatório estratégico</div>
+      <div class="pdf-cover-title" id="pdfTitle"></div>
+      <div class="pdf-cover-author" id="pdfAuthor"></div>
+      <div class="pdf-cover-rule"></div>
+      <p class="pdf-cover-tagline">A essência, os insights e o plano de ação — destilados em uma leitura rápida e aplicável.</p>
+    </div>
+    <div class="pdf-cover-bottom">
+      <div>
+        <div class="pdf-cover-bottom-label">Análise por</div>
+        <div class="pdf-cover-signature">Mentor IA · Analista de Livros</div>
+      </div>
+      <div class="pdf-cover-bottom-label">Edição única</div>
+    </div>
+  </div>
+  <!-- Content pages -->
+  <div class="pdf-page">
+    <div class="pdf-content" id="pdfContent"></div>
+    <div class="pdf-footer">
+      <span id="pdfFooterTitle"></span>
+      <span>Analista de Livros</span>
+    </div>
+  </div>
+</div>
+
+<!-- Libs -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/marked/12.0.2/marked.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+
+<script>
+(() => {
+  // ---------- DOM ----------
+  const form = document.getElementById('form');
+  const bookInput = document.getElementById('book');
+  const authorInput = document.getElementById('author');
+  const apiInput = document.getElementById('apikey');
+  const apiToggle = document.getElementById('apiToggle');
+  const rememberInput = document.getElementById('remember');
+  const submitBtn = document.getElementById('submitBtn');
+  const btnText = document.getElementById('btnText');
+  const status = document.getElementById('status');
+  const result = document.getElementById('result');
+  const resultTitle = document.getElementById('resultTitle');
+  const resultAuthor = document.getElementById('resultAuthor');
+  const resultBody = document.getElementById('resultBody');
+  const downloadBtn = document.getElementById('downloadBtn');
+  const newBtn = document.getElementById('newBtn');
+  const yearSpan = document.getElementById('year');
+
+  yearSpan.textContent = new Date().getFullYear();
+
+  // ---------- API key persistence ----------
+  const STORAGE_KEY = 'al_anthropic_key';
+  const REMEMBER_KEY = 'al_remember';
+
+  if (localStorage.getItem(REMEMBER_KEY) === '1') {
+    const saved = localStorage.getItem(STORAGE_KEY);
+    if (saved) {
+      apiInput.value = saved;
+      rememberInput.checked = true;
+    }
+  }
+
+  apiToggle.addEventListener('click', () => {
+    apiInput.type = apiInput.type === 'password' ? 'text' : 'password';
+  });
+
+  // ---------- Status helpers ----------
+  function showStatus(msg, type = 'info') {
+    status.textContent = msg;
+    status.className = `status is-visible status-${type}`;
+  }
+  function hideStatus() {
+    status.className = 'status';
+    status.textContent = '';
+  }
+  function setLoading(isLoading, label = 'Gerando relatório…') {
+    submitBtn.disabled = isLoading;
+    if (isLoading) {
+      btnText.innerHTML = `<span class="spinner"></span> ${label}`;
+      submitBtn.querySelector('.arrow').style.display = 'none';
+    } else {
+      btnText.textContent = 'Gerar relatório';
+      submitBtn.querySelector('.arrow').style.display = '';
+    }
+  }
+
+  // ---------- System prompt ----------
+  const SYSTEM_PROMPT = `Você é um especialista em leitura estratégica, síntese de conhecimento e aplicação prática de livros. Sua missão é transformar qualquer livro em conhecimento aplicável, direto, claro e útil para a vida real, negócios e desenvolvimento pessoal.
+
+Quando receber o nome de um livro, retorne uma análise completa em formato Markdown seguindo EXATAMENTE esta estrutura, com estes títulos H2 (## numerados):
+
+## 1. Visão Geral do Livro
+Em poucos parágrafos, explique sobre o que é o livro, qual o principal objetivo do autor, e para quem o livro foi escrito.
+
+## 2. Resumo Inteligente
+Traga um resumo completo, porém direto ao ponto. Evite enrolação ou frases genéricas. Explique como se estivesse ensinando alguém ocupado. Linguagem simples, clara e didática.
+
+## 3. Principais Ideias e Insights
+Liste os conceitos mais importantes do livro (regra 80/20). Use uma lista numerada. Para cada ideia, explique de forma prática.
+
+## 4. Melhores Partes do Livro
+Mostre os momentos mais impactantes — frases, cenas ou ideias que valem ouro. Diga por que cada parte é importante.
+
+## 5. Como Aplicar na Vida Real
+Transforme o conteúdo em ações práticas. Dê exemplos reais (negócios, rotina, dinheiro, mentalidade). Mostre exatamente como usar o que foi aprendido.
+
+## 6. Erros Comuns ao Ler Esse Livro
+O que as pessoas entendem errado. Como evitar aplicar mal os conceitos.
+
+## 7. Resumo em 5 Frases
+Resuma todo o livro em exatamente 5 frases ultra-diretas, em lista numerada.
+
+## 8. Plano de Ação
+Crie um passo a passo simples para aplicar o livro no dia a dia. Seja prático e objetivo.
+
+REGRAS:
+- Direto, sem enrolação. Sem linguagem acadêmica complicada.
+- Tom de mentor experiente explicando para alguém ocupado.
+- Priorize clareza acima de tudo.
+- Se o livro tiver pouca utilidade prática, diga com sinceridade.
+- Se algo for clichê ou óbvio, deixe claro.
+- Use português brasileiro.
+- Use **negrito** para destacar conceitos-chave.
+- NÃO inclua o título do livro como H1. Comece direto com "## 1. Visão Geral do Livro".`;
+
+  // ---------- Anthropic API call ----------
+  async function callAnthropic(book, author, apiKey) {
+    const userMsg = author
+      ? `Analise o livro "${book}" do autor ${author}.`
+      : `Analise o livro "${book}".`;
+
+    const response = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'x-api-key': apiKey,
+        'anthropic-version': '2023-06-01',
+        'anthropic-dangerous-direct-browser-access': 'true'
+      },
+      body: JSON.stringify({
+        model: 'claude-sonnet-4-5-20250929',
+        max_tokens: 4096,
+        system: SYSTEM_PROMPT,
+        messages: [{ role: 'user', content: userMsg }]
+      })
+    });
+
+    if (!response.ok) {
+      let errText = `Erro ${response.status}`;
+      try {
+        const errData = await response.json();
+        if (errData?.error?.message) errText = errData.error.message;
+      } catch (_) {}
+      throw new Error(errText);
+    }
+
+    const data = await response.json();
+    const text = data?.content?.[0]?.text;
+    if (!text) throw new Error('Resposta vazia da API.');
+    return text;
+  }
+
+  // ---------- Form submit ----------
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    hideStatus();
+
+    const book = bookInput.value.trim();
+    const author = authorInput.value.trim();
+    const apiKey = apiInput.value.trim();
+
+    if (!book) { showStatus('Informe o nome do livro.', 'error'); return; }
+    if (!apiKey) { showStatus('Informe sua chave da API Anthropic.', 'error'); return; }
+    if (!apiKey.startsWith('sk-ant-')) {
+      showStatus('A chave parece inválida. Chaves da Anthropic começam com "sk-ant-".', 'error');
+      return;
+    }
+
+    if (rememberInput.checked) {
+      localStorage.setItem(STORAGE_KEY, apiKey);
+      localStorage.setItem(REMEMBER_KEY, '1');
+    } else {
+      localStorage.removeItem(STORAGE_KEY);
+      localStorage.removeItem(REMEMBER_KEY);
+    }
+
+    setLoading(true);
+    showStatus(`Analisando "${book}"… isso pode levar de 10 a 30 segundos.`, 'info');
+
+    try {
+      const markdown = await callAnthropic(book, author, apiKey);
+      renderResult(book, author, markdown);
+      hideStatus();
+      result.classList.add('is-visible');
+      result.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    } catch (err) {
+      console.error(err);
+      showStatus(`Falha ao gerar relatório: ${err.message}`, 'error');
+    } finally {
+      setLoading(false);
+    }
+  });
+
+  // ---------- Render ----------
+  let currentMarkdown = '';
+  let currentBook = '';
+  let currentAuthor = '';
+
+  function renderResult(book, author, markdown) {
+    currentMarkdown = markdown;
+    currentBook = book;
+    currentAuthor = author;
+
+    resultTitle.textContent = book;
+    resultAuthor.textContent = author ? `por ${author}` : '';
+
+    const html = marked.parse(markdown, { breaks: false, gfm: true });
+    resultBody.innerHTML = html;
+  }
+
+  // ---------- New book ----------
+  newBtn.addEventListener('click', () => {
+    result.classList.remove('is-visible');
+    bookInput.value = '';
+    authorInput.value = '';
+    bookInput.focus();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+
+  // ---------- PDF generation ----------
+  downloadBtn.addEventListener('click', async () => {
+    if (!currentMarkdown) return;
+
+    const originalLabel = downloadBtn.innerHTML;
+    downloadBtn.disabled = true;
+    downloadBtn.innerHTML = '<span class="spinner"></span> <span>Gerando PDF…</span>';
+
+    try {
+      // Highlight book title (split words for em styling)
+      const titleEl = document.getElementById('pdfTitle');
+      const words = currentBook.split(' ');
+      if (words.length > 1) {
+        const last = words.pop();
+        titleEl.innerHTML = `${escapeHtml(words.join(' '))} <em>${escapeHtml(last)}</em>`;
+      } else {
+        titleEl.innerHTML = `<em>${escapeHtml(currentBook)}</em>`;
+      }
+      document.getElementById('pdfAuthor').textContent = currentAuthor ? `por ${currentAuthor}` : '';
+      document.getElementById('pdfDate').textContent = new Date().toLocaleDateString('pt-BR', { year: 'numeric', month: 'long', day: '2-digit' });
+      document.getElementById('pdfFooterTitle').textContent = currentBook + (currentAuthor ? ` · ${currentAuthor}` : '');
+
+      const contentHtml = marked.parse(currentMarkdown, { breaks: false, gfm: true });
+      document.getElementById('pdfContent').innerHTML = contentHtml;
+
+      const filename = `relatorio-${slugify(currentBook)}.pdf`;
+
+      const opt = {
+        margin: 0,
+        filename,
+        image: { type: 'jpeg', quality: 0.98 },
+        html2canvas: { scale: 2, useCORS: true, letterRendering: true, backgroundColor: '#FFFFFF' },
+        jsPDF: { unit: 'pt', format: 'a4', orientation: 'portrait', compress: true },
+        pagebreak: { mode: ['css', 'legacy'], before: '.pdf-page' }
+      };
+
+      await html2pdf().set(opt).from(document.getElementById('pdfTemplate')).save();
+    } catch (err) {
+      console.error(err);
+      showStatus(`Falha ao gerar PDF: ${err.message}`, 'error');
+    } finally {
+      downloadBtn.disabled = false;
+      downloadBtn.innerHTML = originalLabel;
+    }
+  });
+
+  // ---------- Utils ----------
+  function escapeHtml(s) {
+    return s.replace(/[&<>"']/g, (c) => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  }
+  function slugify(s) {
+    return s.toLowerCase()
+      .normalize('NFD').replace(/[̀-ͯ]/g, '')
+      .replace(/[^a-z0-9]+/g, '-')
+      .replace(/(^-|-$)/g, '')
+      .slice(0, 60) || 'livro';
+  }
+})();
+</script>
+</body>
+</html>
